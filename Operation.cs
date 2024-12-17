@@ -217,7 +217,81 @@ namespace SynCart
             }
 
         }
+        public static void OrderHistory()
+        {
+            bool flag = true;
+            //System.Console.WriteLine("**Order History**");
+            //show the current logged in users ordered details - if present
+            foreach (OrderDetails order in orders)
+            {
+                if (order.CustomerID.Equals(currentLoggedInCustomer.CustomerId))
+                {
+                    flag = false;
+                    System.Console.WriteLine($"{order.CustomerID}\n{order.OrderID}\n{order.ProductID}\n{order.PurchaseDate}\n{order.Quantity}\n{order.OrderStatus}\n{order.TotalPrice}");
+                }
+            }
+            //else show no order history
+            if (flag)
+            {
+                System.Console.WriteLine("No Order History");
+            }
+        }
+        public static void CancelOrder()
+        {
+            System.Console.WriteLine("**Cancel Order**");
+            //Show order details of current customer whose order status is ordered
+            //if not present show order history is not found
+            bool flag = true;
+            foreach (OrderDetails order in orders)
+            {
+                if (currentLoggedInCustomer.CustomerId.Equals(order.CustomerID) && order.OrderStatus.Equals(OrderStatusDetails.Ordered))
+                {
+                    flag = false;
+                    System.Console.WriteLine($"{order.OrderID} {order.CustomerID} {order.ProductID} {order.Quantity} {order.OrderStatus} {order.TotalPrice}");
+                }
+            }
+            if (flag)
+            {
+                System.Console.WriteLine("No order Available");
+            }
+            else
+            {
+                //if present then get order id
+                System.Console.Write("Enter Order ID : ");
+                string orderID = Console.ReadLine();
 
+                //validate order id if not present show invalid order id
+                bool ordercheck = true;
+                foreach (OrderDetails order in orders)
+                {
+                    if (currentLoggedInCustomer.CustomerId.Equals(order.CustomerID) && order.OrderStatus.Equals(OrderStatusDetails.Ordered))
+                    {
+                        ordercheck = false;
+                        //return the order amount to current user wallet balance
+                        currentLoggedInCustomer.WalletRecharge(order.TotalPrice - 50);
+                        //change the order status to cancelled
+                        order.OrderStatus = OrderStatusDetails.Cancelled;
+                        //return the ordered quantity to product stock
+                        foreach (ProductDetails product in products)
+                        {
+                            if (order.ProductID.Equals(product.ProductID))
+                            {
+                                product.Stock += order.Quantity;
+                                break;
+                            }
+                        }
+                        //show order cancelled successfully
+                        System.Console.WriteLine("Order cancelled successfully");
+                        break;
+                    }
+                }
+                if (ordercheck)
+                {
+                    System.Console.WriteLine("Invalid Order ID");
+                }
+
+            }
+        }
 
     }
 }
