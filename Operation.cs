@@ -26,7 +26,7 @@ namespace SynCart
             products.Add(new("HeadPhone (Boat)", 5, 1000, 2));
             products.Add(new("Speakers (Boat)", 4, 500, 2));
         }
-         public static void MainMenu()
+        public static void MainMenu()
         {
             bool flag = false;
             do
@@ -59,6 +59,26 @@ namespace SynCart
 
             } while (flag);
 
+        }
+        public static void Registration()
+        {
+            //get name,city,mobile,balance,emailid
+            System.Console.Write("Enter Name :");
+            string customerName = Console.ReadLine();
+            System.Console.Write("Enter City : ");
+            string city = Console.ReadLine();
+            System.Console.Write("Enter Mobile :");
+            string mobile = Console.ReadLine();
+            System.Console.WriteLine("Enter EmailID : ");
+            string emailId = Console.ReadLine();
+            System.Console.WriteLine("Enter Wallet Balance : ");
+            double walletBalance = double.Parse(Console.ReadLine());
+            //create object
+            CustomerDetails customer = new(customerName, city, mobile, walletBalance, emailId);
+            //show registration successful and registration id
+            System.Console.WriteLine($"Registration Successful! and your ID is {customer.CustomerId}");
+            //add the object to list
+            customers.Add(customer);
         }
     }
 }
