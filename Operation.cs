@@ -121,7 +121,7 @@ namespace SynCart
                 {
                     case 1:
                         {
-                            // Purchase();
+                            Purchase();
                             break;
 
                         }
@@ -153,6 +153,68 @@ namespace SynCart
                         }
                 }
             } while (flag);
+
+        }
+        public static void Purchase()
+        {
+            System.Console.WriteLine("**Purchase**");
+            //Show Product List
+            foreach (ProductDetails product in products)
+            {
+                Console.WriteLine($"{product.ProductID} {product.ProductName} {product.Stock} {product.Price} {product.ShippingDuration}");
+
+            }
+            //Get Product Id
+            System.Console.Write("Enter Product ID : ");
+            string ProductID = Console.ReadLine();
+
+            //get quantity needed
+            System.Console.Write("Enter Quantity : ");
+            int quantity = int.Parse(Console.ReadLine());
+            //check product is valid if no show invalid product id
+            bool flag = true;
+            foreach (ProductDetails product in products)
+            {
+
+
+                if (product.ProductID.Equals(ProductID))
+                {
+                    flag = false;
+                    if (product.Stock >= quantity)
+                    {
+                        //find total amount and add with delivery charge
+                        double total = (quantity * product.Price) + 50;
+                        //check user has available balance if no show insufficient balance
+                        if (total <= currentLoggedInCustomer.WalletBalance)
+                        {
+                            //if he has balance deduct amount from his balance
+                            currentLoggedInCustomer.DeductBalance(total);
+                            //reduce product count
+                            product.Stock -= quantity;
+                            //create order object
+                            OrderDetails order = new OrderDetails(currentLoggedInCustomer.CustomerId, ProductID, total, DateTime.Now, quantity, OrderStatusDetails.Ordered);
+                            //show order created successfully and order ID
+                            System.Console.WriteLine($"Ordered Successfully.\nOrderID : {order.OrderID}");
+                            //add to list
+                            orders.Add(order);
+                            //if valid id then check quantity is available if no show insuffient quantity
+                        }
+                        else
+                        {
+                            System.Console.WriteLine("Insufficient Balance");
+                        }
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("Insufficient Quantity");
+                    }
+                    break;
+                }
+            }
+            if (flag)
+            {
+                System.Console.WriteLine("Invalid Product");
+            }
 
         }
 
