@@ -26,5 +26,39 @@ namespace SynCart
             products.Add(new("HeadPhone (Boat)", 5, 1000, 2));
             products.Add(new("Speakers (Boat)", 4, 500, 2));
         }
+         public static void MainMenu()
+        {
+            bool flag = false;
+            do
+            {
+                System.Console.WriteLine("******Main Menu******");
+                //show option 1. Registration 2. Login 3. Exit
+                System.Console.WriteLine("1. Registration\n2. Login\n3. Exit");
+                //get option
+                int option = int.Parse(Console.ReadLine());
+                switch (option)
+                {
+                    //call methods
+                    case 1:
+                        {
+                            //Registration();
+                            break;
+                        }
+                    case 2:
+                        {
+                            //Login();
+                            break;
+                        }
+                    case 3:
+                        {
+                            flag = false;
+                            System.Console.WriteLine("Thank You");
+                            break;
+                        }
+                }
+
+            } while (flag);
+
+        }
     }
 }
