@@ -95,7 +95,7 @@ namespace SynCart
                     //if present put customer object globally
                     currentLoggedInCustomer = customer;
                     //call Sub Menu
-                    //SubMenu();
+                    SubMenu();
                     flag = true;
                     break;
                 }
@@ -127,22 +127,22 @@ namespace SynCart
                         }
                     case 2:
                         {
-                            // OrderHistory();
+                            OrderHistory();
                             break;
                         }
                     case 3:
                         {
-                            //  CancelOrder();
+                            CancelOrder();
                             break;
                         }
                     case 4:
                         {
-                            //   WalletBalance();
+                            WalletBalance();
                             break;
                         }
                     case 5:
                         {
-                            //  WalletRecharge();
+                            WalletRecharge();
                             break;
                         }
                     case 6:
@@ -290,6 +290,29 @@ namespace SynCart
                     System.Console.WriteLine("Invalid Order ID");
                 }
 
+            }
+        }
+        public static void WalletBalance()
+        {
+            System.Console.WriteLine("**Wallet Balance**");
+            System.Console.WriteLine($"Your Current Balance is {currentLoggedInCustomer.WalletBalance}");
+        }
+        public static void WalletRecharge()
+        {
+            System.Console.WriteLine("**Wallet Recharge");
+            //Get amount to be recharged
+            //if it is valid amount then add the amount to the user wallet balance and show the amount
+            //else invalid amount
+            System.Console.Write("Enter the amount to be recharged : ");
+            double amount = double.Parse(Console.ReadLine());
+            if (amount > 0)
+            {
+                currentLoggedInCustomer.WalletRecharge(amount);
+                System.Console.WriteLine($"Wallet Balance has been successfully added..\nYour Current Wallet Balance is {currentLoggedInCustomer.WalletBalance}");
+            }
+            else
+            {
+                System.Console.WriteLine("Invalid Amount");
             }
         }
 
