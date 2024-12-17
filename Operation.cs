@@ -105,5 +105,57 @@ namespace SynCart
                 System.Console.WriteLine("Invalid Customer Details");
             }
         }
+
+
+        public static void SubMenu()
+        {
+
+            bool flag = true;
+            //             a.	Purchase b.	OrderHistory c.	CancelOrder d.	WalletBalance e.	WalletRecharge f.	Exit
+            do
+            {
+                System.Console.WriteLine("******Sub Menu******");
+                System.Console.WriteLine("1. Purchase\n2. Order History\n3. Cancel Order\n4. Wallet Balance\n5. Wallet Recharge\n6. Exit");
+                int option = int.Parse(Console.ReadLine());
+                switch (option)
+                {
+                    case 1:
+                        {
+                            // Purchase();
+                            break;
+
+                        }
+                    case 2:
+                        {
+                            // OrderHistory();
+                            break;
+                        }
+                    case 3:
+                        {
+                            //  CancelOrder();
+                            break;
+                        }
+                    case 4:
+                        {
+                            //   WalletBalance();
+                            break;
+                        }
+                    case 5:
+                        {
+                            //  WalletRecharge();
+                            break;
+                        }
+                    case 6:
+                        {
+                            flag = false;
+                            System.Console.WriteLine("ThankYou");
+                            break;
+                        }
+                }
+            } while (flag);
+
+        }
+
+
     }
 }
