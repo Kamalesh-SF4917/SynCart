@@ -28,7 +28,7 @@ namespace SynCart
         }
         public static void MainMenu()
         {
-            bool flag = false;
+            bool flag = true;
             do
             {
                 System.Console.WriteLine("******Main Menu******");
