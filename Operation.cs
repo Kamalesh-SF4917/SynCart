@@ -41,12 +41,12 @@ namespace SynCart
                     //call methods
                     case 1:
                         {
-                            //Registration();
+                            Registration();
                             break;
                         }
                     case 2:
                         {
-                            //Login();
+                            Login();
                             break;
                         }
                     case 3:
@@ -79,6 +79,31 @@ namespace SynCart
             System.Console.WriteLine($"Registration Successful! and your ID is {customer.CustomerId}");
             //add the object to list
             customers.Add(customer);
+        }
+        public static void Login()
+        {
+            System.Console.WriteLine("******Login Menu******");
+            //get Customer ID
+            System.Console.WriteLine("Enter Customer ID");
+            string customerId = Console.ReadLine().ToUpper();
+            bool flag = false;
+            foreach (CustomerDetails customer in customers)
+            //check customer id is present or not
+            {
+                if (customerId.Equals(customer.CustomerId))
+                {
+                    //if present put customer object globally
+                    currentLoggedInCustomer = customer;
+                    //call Sub Menu
+                    //SubMenu();
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                System.Console.WriteLine("Invalid Customer Details");
+            }
         }
     }
 }
