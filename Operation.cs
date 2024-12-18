@@ -166,7 +166,7 @@ namespace SynCart
             }
             //Get Product Id
             System.Console.Write("Enter Product ID : ");
-            string ProductID = Console.ReadLine();
+            string ProductID = Console.ReadLine().ToUpper();
 
             //get quantity needed
             System.Console.Write("Enter Quantity : ");
